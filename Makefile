@@ -16,7 +16,8 @@ CXXFLAGS = -Wall -Werror -Wextra -O3
 LDFLAGS =  -lncurses
 
 SOURCES = AGameEntity.cpp			\
-					AShip.cpp						\
+					AShip.cpp		\
+					AMissile.cpp	\
 
 TESTSSOURCES = tests/Ship.cpp \
 
