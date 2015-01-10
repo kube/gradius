@@ -11,6 +11,10 @@
 #ifndef ASHIP_HPP
 #define ASHIP_HPP
 
+#include "AGameEntity.hpp"
+
+class AMissile;
+
 class AShip : public AGameEntity {
 
 public:

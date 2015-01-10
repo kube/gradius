@@ -14,7 +14,7 @@ AShip::AShip() {
 
 }
 
-AShip::AShip(const AShip& ship) {
+AShip::AShip(const AShip& ship) : AGameEntity(ship) {
   (void)ship;
 }
 
@@ -23,6 +23,7 @@ AShip::~AShip() {
 }
 
 AShip&    AShip::operator=(const AShip& ship) {
+  (void)ship;
   return *this;
 }
 

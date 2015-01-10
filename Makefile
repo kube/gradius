@@ -16,10 +16,10 @@ CXXFLAGS = -Wall -Werror -Wextra -O3
 LDFLAGS =  -lncurses
 
 SOURCES = AGameEntity.cpp			\
-					AShip.cpp		\
-					AMissile.cpp	\
+					AShip.cpp						\
+					AMissile.cpp				\
 
-TESTSSOURCES = tests/Ship.cpp \
+TESTSSOURCES = 
 
 OBJECTS = $(SOURCES:.cpp=.o)
 TESTSOBJECTS = $(TESTSSOURCES:.cpp=.o)
@@ -42,14 +42,14 @@ all: $(NAME) tests
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo " $(OK_COLOR)✓$(NO_COLOR)"
 
-$(NAME): main.o $(OBJECTS)
+$(NAME): $(OBJECTS) main.o
 	@printf "$(SILENT_COLOR)$(NAME)$(NO_COLOR)"
 	@$(CXX) $(CXXFLAGS) main.o $(OBJECTS) $(LDFLAGS) -o $(NAME)
 	@echo " $(OK_COLOR)Done ✓$(NO_COLOR)"
 
-tests: $(OBJECTS) $(TESTSOBJECTS)
+tests: $(OBJECTS) $(TESTSOBJECTS) tests/tests.o
 	@printf "$(SILENT_COLOR)Tests$(NO_COLOR)"
-	@$(CXX) $(CXXFLAGS) $(OBJECTS) $(TESTSOBJECTS) $(LDFLAGS) -o test
+	@$(CXX) $(CXXFLAGS) tests/tests.o $(OBJECTS) $(TESTSOBJECTS) $(LDFLAGS) -o test
 	@echo " $(OK_COLOR)Done ✓$(NO_COLOR)"
 	@./test
 

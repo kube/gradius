@@ -10,13 +10,13 @@
 
 #include <iostream>
 #include "AMissile.hpp"
+#include "AShip.hpp"
 
-
-AMissile::AMissile() {
+AMissile::AMissile(const AShip& sender, float power) : _sender(sender), _power(power) {
 
 }
 
-AMissile::AMissile(const AMissile& missile) {
+AMissile::AMissile(const AMissile& missile) : AGameEntity(), _sender(missile._sender) {
 	(void)missile;
 }
 

@@ -11,11 +11,13 @@
 #ifndef AMISSILE_HPP
 #define AMISSILE_HPP
 
+#include "AShip.hpp"
+
 class AMissile : public AGameEntity {
 
 public:
 
-  AMissile();
+  AMissile(const AShip& sender, float power);
   AMissile(const AMissile& ship);
   ~AMissile();
 
@@ -24,11 +26,13 @@ public:
 
 protected:
 
-  AShip&  _sender;
-  float   _power;
+  const AShip&  _sender;
+  float         _power;
 
 
 private:
+
+  AMissile();
 
 
 };
