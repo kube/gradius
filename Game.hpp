@@ -11,24 +11,26 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "World.hpp"
+#include "AShip.hpp"
+
 class Game {
 
 public:
 
   Game();
-  Game(const Game& ship);
+  Game(const Game& game);
   ~Game();
 
-  Game& operator=(const Game& ship);
+  Game& operator=(const Game& game);
 
-
-protected:
-
-  AShip& _sender;
-  float _power;
+  void  draw();
+  void  refreshPhysics();
 
 
 private:
+
+  World&  _world;
 
 
 };

@@ -17,7 +17,7 @@ AGameEntity::AGameEntity() {
 }
 
 AGameEntity::AGameEntity(const AGameEntity& gameEntity) {
-  (void)gameEntity;
+  *this = gameEntity;
 }
 
 AGameEntity::~AGameEntity() {

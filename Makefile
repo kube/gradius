@@ -18,6 +18,8 @@ LDFLAGS =  -lncurses
 SOURCES = AGameEntity.cpp			\
 					AShip.cpp						\
 					AMissile.cpp				\
+					Game.cpp						\
+					World.cpp						\
 
 TESTSSOURCES = 
 
