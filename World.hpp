@@ -28,8 +28,12 @@ public:
   void            draw();
   void            refreshPhysics();
 
-  AGameEntity*    getEntityAt(int, int);
+  int             getWidth();
+  int             getHeight();
+
+  AGameEntity*    getEntityAt(int x, int y);
 	void			      setEntityAt(int x, int y, AGameEntity * entity);
+
 
 private:
 
@@ -38,7 +42,6 @@ private:
 
   int             _width;
   int             _height;
-  WINDOW*         _box;
   AGameEntity***  _map;
 
 

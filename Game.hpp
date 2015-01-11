@@ -36,11 +36,14 @@ public:
   void  stopMusic();
   World& getWorld();
 
+  static Game& getInstance();
+
+
 private:
 
   bool      _running;
 	World&    _world;
-	Player&   _player;
+	Player&   _player1;
   pthread_t _musicThread;
 
 };

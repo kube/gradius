@@ -12,12 +12,28 @@
 #include <ncurses.h>
 #include "World.hpp"
 
+
+static void drawRectangle(int x, int y, int width, int height) {
+
+  attron(COLOR_PAIR(2));
+
+  for (int i = x; i <= x + width; i++) {
+    for (int j = y; j <= y + height; j++) {
+      move(j, i);
+      if (i == x || j == y || j == y + height || i == x + width)
+        printw(".");
+    }
+  }
+
+  attroff(COLOR_PAIR(2));
+}
+
+
 World::World() :
   _width(200),
   _height(200)
 {
   _createMap();
-  _createBox();
 }
 
 World::World(int width, int height) :
@@ -25,7 +41,6 @@ World::World(int width, int height) :
   _height(height)
 {
   _createMap();
-  _createBox();
 }
 
 World::World(const World& world) {
@@ -54,20 +69,21 @@ void          World::_createMap() {
   }
 }
 
-void          World::_createBox() {
+int           World::getHeight() {
+  return _height;
+}
 
+int           World::getWidth() {
+  return _width;
 }
 
 void          World::draw() {
-  ///
+  clear();
+
   int offsetX = (COLS - _width) / 2;
   int offsetY = (LINES - _height) / 2;
 
-  _box = newwin(_height, _width, offsetY, offsetX);
-  ///
-
-  box(_box, 0, 0);
-  wrefresh(_box);
+  drawRectangle(offsetX, offsetY, _width, _height);
 }
 
 void          World::refreshPhysics() {

@@ -23,7 +23,7 @@ public:
   AGameEntity& operator=(const AGameEntity& gameEntity);
 
   void refreshPhyxsics() ;
-  void move(float, float) ;
+  void movePosition(float, float);
 
   int   getColor();
   float getPosX();
