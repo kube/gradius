@@ -46,27 +46,27 @@ AGameEntity& AGameEntity::operator=(const AGameEntity& gameEntity) {
 }
 
 
-World& AGameEntity::getWorld() {
+World& AGameEntity::getWorld() const {
   return _world;
 }
 
-int   AGameEntity::getColor() {
+int   AGameEntity::getColor() const {
   return _color;
 }
 
-float AGameEntity::getPosX() {
+float AGameEntity::getPosX() const {
   return _posX;
 }
 
-float AGameEntity::getPosY() {
+float AGameEntity::getPosY() const {
   return _posY;
 }
 
-float AGameEntity::getDirX() {
+float AGameEntity::getDirX() const {
   return _dirX;
 }
 
-float AGameEntity::getDirY() {
+float AGameEntity::getDirY() const {
   return _dirY;
 }
 

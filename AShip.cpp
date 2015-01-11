@@ -40,10 +40,10 @@ void      AShip::shoot(float power) {
 
 
 
-float     AShip::getShootX() {
+float     AShip::getShootX() const {
   return _shootX;
 }
-float     AShip::getShootY() {
+float     AShip::getShootY() const {
   return _shootY;
 }
 

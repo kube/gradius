@@ -26,9 +26,10 @@ public:
 
   Player& operator=(const Player& game);
 
-  void    draw(int offsetX, int offsetY);
+  void    draw();
   void    refreshPhysics();
   void    moveImpulsion(float x, float y);
+  void    shoot();
 
 
 private:

@@ -18,6 +18,7 @@ LDFLAGS = -lncurses -lpthread
 SOURCES = AGameEntity.cpp			\
 					AShip.cpp						\
 					AMissile.cpp				\
+					BasicMissile.cpp		\
 					Game.cpp						\
 					World.cpp						\
 					Player.cpp

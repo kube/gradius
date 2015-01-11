@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include "Player.hpp"
 
+#include "BasicMissile.hpp"
 
 Player::Player() :
   AShip(100, 100, 100, 0, 1, 53)
@@ -43,6 +44,10 @@ Player& Player::operator=(const Player& game) {
 }
 
 
+void  Player::shoot() {
+  new BasicMissile(*this, 1.0f);
+}
+
 void  Player::refreshPhysics() {
   _posX += _dirX / 3;
   _posY += _dirY / 3;
@@ -71,7 +76,9 @@ void  Player::moveImpulsion(float x, float y) {
   _dirY = _dirY > 4 ? 4 : _dirY;
 }
 
-void  Player::draw(int offsetX, int offsetY) {
+void  Player::draw() {
+  int offsetX = (COLS - _world.getWidth()) / 2;
+  int offsetY = (LINES - _world.getHeight()) / 2;
 
   move(offsetY + _posY, offsetX + _posX);
   printw("A");

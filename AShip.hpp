@@ -27,8 +27,8 @@ public:
 
   void        shoot(float power);
 
-  float       getShootX();
-  float       getShootY();
+  float       getShootX() const;
+  float       getShootY() const;
 
   void        setShootX(float);
   void        setShootY(float);

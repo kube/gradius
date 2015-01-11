@@ -17,13 +17,11 @@ static void drawRectangle(int x, int y, int width, int height) {
 
   attron(COLOR_PAIR(2));
 
-  for (int i = x; i <= x + width; i++) {
-    for (int j = y; j <= y + height; j++) {
-      move(j, i);
-      if (i == x || j == y || j == y + height || i == x + width)
-        printw(".");
-    }
-  }
+  mvvline(y, x, '*', height);
+  mvvline(y, x + width, '*', height);
+
+  mvhline(y, x, '*', width);
+  mvhline(y + height, x, '*', width);
 
   attroff(COLOR_PAIR(2));
 }

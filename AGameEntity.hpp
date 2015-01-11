@@ -27,12 +27,12 @@ public:
   virtual void refreshPhysics() = 0;
   void movePosition(float, float);
 
-  World& getWorld();
-  int   getColor();
-  float getPosX();
-  float getPosY();
-  float getDirX();
-  float getDirY();
+  World&  getWorld() const;
+  int     getColor() const;
+  float   getPosX() const;
+  float   getPosY() const;
+  float   getDirX() const;
+  float   getDirY() const;
 
   void  setColor(int);
   void  setPosX(float);

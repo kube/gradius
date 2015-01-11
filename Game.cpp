@@ -71,6 +71,10 @@ void  Game::_getKey() {
     case KEY_DOWN:
       _player1->moveImpulsion(0, 0.1);
       break;
+
+    case ' ':
+      _player1->shoot();
+      break;
   }
 }
 
@@ -117,11 +121,8 @@ void Game::stopMusic() {
 
 
 void  Game::draw() {
-  int offsetX = (COLS - _world.getWidth()) / 2;
-  int offsetY = (LINES - _world.getHeight()) / 2;
-
   _world.draw();
-  _player1->draw(offsetX, offsetY);
+  _player1->draw();
 }
 
 void  Game::refreshPhysics() {
