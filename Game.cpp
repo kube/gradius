@@ -26,8 +26,8 @@ static void initColors() {
 }
 
 Game::Game(int width, int height) :
-    _running(true),
-    _world(*(new World(width, height)))
+  _running(true),
+  _world(*(new World(width, height)))
 {
 
 }
@@ -42,10 +42,11 @@ Game& Game::operator=(const Game& game) {
   return *this;
 }
 
+
+
 void  Game::setPlayer1(int x, int y) {
   _player1 = new Player(x, y);
 }
-
 
 void  Game::_getKey() {
   int key = getch(); 
@@ -78,9 +79,6 @@ void  Game::_getKey() {
   }
 }
 
-void  Game::stop() {
-  _running = false;
-}
 
 void  Game::run() {
   initscr();
@@ -93,6 +91,7 @@ void  Game::run() {
 
 
   setPlayer1(_world.getWidth() / 2, _world.getHeight() * 3 / 4);
+  _world.popRandomEnemy();
 
   // playMusic();
 
@@ -102,7 +101,7 @@ void  Game::run() {
     draw();
     refresh();
 
-    usleep(9000);
+    usleep(300);
   }
 
   // stopMusic();
@@ -111,6 +110,9 @@ void  Game::run() {
   endwin();
 }
 
+void  Game::stop() {
+  _running = false;
+}
 
 static void *musicThreadedPlay(void *args) {
   (void)args;
@@ -134,7 +136,6 @@ void  Game::draw() {
 
 void  Game::refreshPhysics() {
   _world.refreshPhysics();
-  _player1->refreshPhysics();
 }
 
 World& Game::getWorld()

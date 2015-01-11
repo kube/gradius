@@ -9,15 +9,7 @@
       ## ## ##*/
 
 #include <iostream>
-#include <ncurses.h>
 #include "AEnemy.hpp"
-
-
-AEnemy::AEnemy() :
-  AShip(100, 100, 100, 0, 1, 0)
-{
-
-}
 
 AEnemy::AEnemy(int x, int y) :
 	AShip(100, 100, 100, 0, 1, 0)

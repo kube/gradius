@@ -19,6 +19,8 @@ SOURCES = AGameEntity.cpp			\
 					AShip.cpp						\
 					AMissile.cpp				\
 					BasicMissile.cpp		\
+					AEnemy.cpp					\
+					BasicEnemy.cpp			\
 					Game.cpp						\
 					World.cpp						\
 					Player.cpp

@@ -34,6 +34,7 @@ public:
   AGameEntity*    getEntityAt(int x, int y);
 	void			      setEntityAt(int x, int y, AGameEntity * entity);
 
+  void            popRandomEnemy();
 
 private:
 

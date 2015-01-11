@@ -10,17 +10,20 @@
 
 #include <iostream>
 #include <ncurses.h>
+#include <unistd.h>
 #include "Player.hpp"
-
 #include "BasicMissile.hpp"
+
 
 Player::Player() :
   AShip(100, 100, 100, 0, -1, 53)
 {
-  _deceleration = 0.98;
-  _acceleration = 0.33;
-  _bounce = 1.3;
-  _maxSpeed = 13;
+  _deceleration = 0.998;
+  _acceleration = 0.08;
+  _bounce = 0.4;
+  _maxSpeed = 1.3;
+
+  _world.setEntityAt((int)_posX, (int)_posY, this);
 }
 
 Player::Player(int x, int y) :
@@ -29,10 +32,12 @@ Player::Player(int x, int y) :
   _posX = x;
   _posY = y;
 
-  _deceleration = 0.98;
-  _acceleration = 0.33;
-  _bounce = 1.3;
-  _maxSpeed = 13;
+  _deceleration = 0.998;
+  _acceleration = 0.08;
+  _bounce = 0.4;
+  _maxSpeed = 1.3;
+
+  _world.setEntityAt((int)_posX, (int)_posY, this);
 }
 
 Player::Player(const Player& player) :
@@ -52,51 +57,36 @@ Player& Player::operator=(const Player& player) {
 }
 
 
-void  Player::shoot() {
-  new BasicMissile(*this, 1.0f);
-}
-
-void  Player::refreshPhysics() {
-  _posX += _dirX * _acceleration;
-  _posY += _dirY * _acceleration;
-
-  _dirX *= _deceleration;
-  _dirY *= _deceleration;
-
-  if (_posX <= 1) {
-    _posX = 1;
-    _dirX = -_dirX * _bounce;
-  }
-  else if (_posX >= _world.getWidth()) {
-    _posX = _world.getWidth();
-    _dirX = -_dirX * _bounce;
-  }
-
-  if (_posY <= 1) {
-    _posY = 1;
-    _dirY = -_dirY * _bounce;
-  }
-  else if (_posY >= _world.getHeight()) {
-    _posY = _world.getHeight();
-    _dirY = -_dirY * _bounce;
-  }
-
-  _posY = _posY > _world.getHeight() ? _world.getHeight() - 1 : _posY;
-  _posY = _posY < 1 ? 1 : _posY;
-}
-
-void  Player::moveImpulsion(float x, float y) {
-  _dirX += x;
-  _dirY += y;
-
-  _dirX = _dirX > _maxSpeed ? _maxSpeed : _dirX;
-  _dirY = _dirY > _maxSpeed ? _maxSpeed : _dirY;
-}
-
 void  Player::draw() {
   int offsetX = (COLS - _world.getWidth()) / 2;
   int offsetY = (LINES - _world.getHeight()) / 2;
 
   move(offsetY + _posY, offsetX + _posX);
   printw("A");
+}
+
+void Player::bounce() {
+
+}
+
+void Player::collide() {
+
+}
+
+void  Player::shoot() {
+  new BasicMissile(*this, 1.0f);
+}
+
+float abs(float a) {
+  if (a < 0)
+    return -a;
+  return a;
+}
+
+void  Player::moveImpulsion(float x, float y) {
+  _dirX += x;
+  _dirY += y;
+
+  _dirX = abs(_dirX) > _maxSpeed ? _dirX / abs(_dirX) * _maxSpeed : _dirX;
+  _dirY = abs(_dirY) > _maxSpeed ? _dirY / abs(_dirY) * _maxSpeed : _dirY;
 }

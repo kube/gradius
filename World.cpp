@@ -13,6 +13,7 @@
 #include "World.hpp"
 
 #include "Game.hpp"
+#include "BasicEnemy.hpp"
 
 static void drawRectangle(int x, int y, int width, int height) {
 
@@ -103,4 +104,8 @@ AGameEntity*  World::getEntityAt(int x, int y) {
 
 void    World::setEntityAt(int x, int y, AGameEntity* entity) {
 	this->_map[x][y] = entity;
+}
+
+void  World::popRandomEnemy() {
+  new BasicEnemy(_width / 2, 1);
 }

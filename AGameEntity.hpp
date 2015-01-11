@@ -20,12 +20,15 @@ public:
   AGameEntity();
   AGameEntity(int x, int y);
   AGameEntity(const AGameEntity& gameEntity);
-  ~AGameEntity();
+  virtual ~AGameEntity() = 0;
 
   AGameEntity& operator=(const AGameEntity& gameEntity);
 
   virtual void draw() = 0;
-  virtual void refreshPhysics() = 0;
+  virtual void bounce() = 0;
+  virtual void collide() = 0;
+
+  void refreshPhysics();
   void movePosition(float, float);
 
   World&  getWorld() const;

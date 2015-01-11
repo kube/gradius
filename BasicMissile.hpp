@@ -25,6 +25,8 @@ public:
   BasicMissile& operator=(const BasicMissile& ship);
 
   void  draw();
+  void  bounce();
+  void  collide();
   void  refreshPhysics();
 
 

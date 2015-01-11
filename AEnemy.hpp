@@ -14,8 +14,6 @@
 #include "World.hpp"
 #include "AShip.hpp"
 
-#include <ncurses.h>
-
 class AEnemy : public AShip {
 
 public:

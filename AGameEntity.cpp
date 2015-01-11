@@ -46,6 +46,46 @@ AGameEntity& AGameEntity::operator=(const AGameEntity& gameEntity) {
 }
 
 
+
+void  AGameEntity::refreshPhysics() {
+  int didBounce = false;
+
+  _world.setEntityAt((int)_posX, (int)_posY, NULL);
+
+  _posX += _dirX * _acceleration;
+  _posY += _dirY * _acceleration;
+
+  _dirX *= _deceleration;
+  _dirY *= _deceleration;
+
+  if (_posX < 1) {
+    _posX = 1;
+    _dirX = -_dirX * _bounce;
+    didBounce = true;
+  }
+  else if (_posX >= _world.getWidth()) {
+    _posX = _world.getWidth() - 1;
+    _dirX = -_dirX * _bounce;
+    didBounce = true;
+  }
+
+  if (_posY < 1) {
+    _posY = 1;
+    _dirY = -_dirY * _bounce;
+    didBounce = true;
+  }
+  else if (_posY >= _world.getHeight()) {
+    _posY = _world.getHeight() - 1;
+    _dirY = -_dirY * _bounce;
+    didBounce = true;
+  }
+  _world.setEntityAt((int)_posX, (int)_posY, this);
+
+  if (didBounce)
+    bounce();
+}
+
+
 World& AGameEntity::getWorld() const {
   return _world;
 }

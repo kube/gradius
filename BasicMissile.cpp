@@ -25,16 +25,24 @@ BasicMissile::BasicMissile(const AShip& sender, float power) :
   _dirX = _sender.getShootX() * power;
   _dirY = _sender.getShootY() * power;
 
-  _world.setEntityAt((int)_posX, (int)_posY, this);
-}
-
-void BasicMissile::refreshPhysics() {
-  _world.setEntityAt((int)_posX, (int)_posY, NULL);
-
-
+  _deceleration = 1.00001;
+  _acceleration = 0.05;
+  _bounce = 0.0;
+  _maxSpeed = 0.8;
 
   _world.setEntityAt((int)_posX, (int)_posY, this);
 }
+
+BasicMissile& BasicMissile::operator=(const BasicMissile& missile) {
+  (void)missile;
+  return *this;
+}
+
+BasicMissile::~BasicMissile() {
+
+}
+
+
 
 void BasicMissile::draw() {
   int offsetX = (COLS - _world.getWidth()) / 2;
@@ -44,7 +52,12 @@ void BasicMissile::draw() {
   printw("|");
 }
 
-BasicMissile& BasicMissile::operator=(const BasicMissile& missile) {
-  (void)missile;
-  return *this;
+void BasicMissile::bounce() {
+  _world.setEntityAt((int)_posX, (int)_posY, NULL);
+  delete this;
+}
+
+void BasicMissile::collide() {
+  _world.setEntityAt((int)_posX, (int)_posY, NULL);
+  delete this;
 }

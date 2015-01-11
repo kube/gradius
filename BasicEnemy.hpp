@@ -8,36 +8,33 @@
      ## ## ## :##
       ## ## ##*/
 
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#ifndef BASICENEMY_HPP
+#define BASICENEMY_HPP
 
 #include "World.hpp"
-#include "AShip.hpp"
+#include "AEnemy.hpp"
 
-#include <ncurses.h>
-
-class Player : public AShip {
+class BasicEnemy : public AEnemy {
 
 public:
 
-  Player(int x, int y);
-  Player(const Player& game);
-  ~Player();
+  BasicEnemy(int x, int y);
+  BasicEnemy(const BasicEnemy& game);
+  ~BasicEnemy();
 
-  Player& operator=(const Player& game);
+  BasicEnemy& operator=(const BasicEnemy& game);
 
   void    draw();
+  void    shoot();
   void    bounce();
   void    collide();
   void    refreshPhysics();
-  void    moveImpulsion(float x, float y);
-  void    shoot();
 
 
 private:
 
-  Player();
-  
+  BasicEnemy();
+
 
 };
 
