@@ -20,6 +20,7 @@ SOURCES = AGameEntity.cpp			\
 					AMissile.cpp				\
 					Game.cpp						\
 					World.cpp						\
+					Player.cpp						\
 
 TESTSSOURCES = 
 
