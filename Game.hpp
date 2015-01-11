@@ -21,9 +21,7 @@ class Game {
 
 public:
 
-  Game();
-	Game(int x, int y);
-  Game(const Game& game);
+  Game(int x, int y);
   ~Game();
 
   Game& operator=(const Game& game);
@@ -36,7 +34,10 @@ public:
   void  stopMusic();
   World& getWorld();
 
-  static Game& getInstance();
+  static Game* getInstance();
+
+  void  setPlayer1(int x, int y);
+  void  setPlayer2(int x, int y);
 
 
 private:
@@ -45,8 +46,15 @@ private:
 
   bool      _running;
   World&    _world;
-  Player&   _player1;
+  Player*   _player1;
+  Player*   _player2;
   pthread_t _musicThread;
+
+  static Game* _instance;
+
+  Game();
+  Game(const Game& game);
+
 
 };
 

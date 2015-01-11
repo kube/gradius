@@ -25,29 +25,11 @@ static void initColors() {
   init_pair(6, COLOR_CYAN, COLOR_BLACK);
 }
 
-
-Game::Game() :
-  _running(true),
-  _world(*(new World())),
-  _player1(*(new Player(_world.getWidth() / 2, _world.getHeight() * 3 / 4)))
-{
-  // std::cout << "Welcome to the Game !" << std::endl;
-}
-
 Game::Game(int width, int height) :
     _running(true),
-    _world(*(new World(width, height))),
-    _player1(*(new Player(width / 2, height * 3 / 4)))
+    _world(*(new World(width, height)))
 {
-	// std::cout << "Welcome to the Game !" << std::endl;
-}
 
-Game::Game(const Game& game) :
-  _running(true),
-  _world(*(new World(game._world))),
-  _player1(*(new Player(game._player1)))
-{
-  *this = game;
 }
 
 Game::~Game() {
@@ -58,6 +40,10 @@ Game& Game::operator=(const Game& game) {
   (void)game;
   
   return *this;
+}
+
+void  Game::setPlayer1(int x, int y) {
+  _player1 = new Player(x, y);
 }
 
 
@@ -71,19 +57,19 @@ void  Game::_getKey() {
       break;
 
     case KEY_RIGHT:
-      _player1.moveImpulsion(0.5, 0);
+      _player1->moveImpulsion(0.5, 0);
       break;
 
     case KEY_LEFT:
-      _player1.moveImpulsion(-0.5, 0);
+      _player1->moveImpulsion(-0.5, 0);
       break;
 
     case KEY_UP:
-      _player1.moveImpulsion(0, -0.1);
+      _player1->moveImpulsion(0, -0.1);
       break;
 
     case KEY_DOWN:
-      _player1.moveImpulsion(0, 0.1);
+      _player1->moveImpulsion(0, 0.1);
       break;
   }
 }
@@ -95,23 +81,17 @@ void  Game::run() {
   nodelay(stdscr, TRUE);
   curs_set(0);
   noecho();
-
-  (void)initColors();
-  // initColors();
+  initColors();
 
   // playMusic();
 
   while (_running) {
+    _getKey();
+    refreshPhysics();
+    draw();
     refresh();
 
-    // Check times here
-
-    draw();
-    refreshPhysics();
-
-    _getKey();
-
-    usleep(10000);
+    usleep(4000);
   }
 
   // stopMusic();
@@ -141,15 +121,21 @@ void  Game::draw() {
   int offsetY = (LINES - _world.getHeight()) / 2;
 
   _world.draw();
-  _player1.draw(offsetX, offsetY);
+  _player1->draw(offsetX, offsetY);
 }
 
 void  Game::refreshPhysics() {
   _world.refreshPhysics();
-  _player1.refreshPhysics();
+  _player1->refreshPhysics();
 }
 
 World& Game::getWorld()
 {
 	return _world;
 }
+
+Game* Game::getInstance() {
+  return _instance;
+}
+
+Game* Game::_instance = new Game(87,70);

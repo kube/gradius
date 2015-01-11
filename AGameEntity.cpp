@@ -9,26 +9,28 @@
       ## ## ##*/
 
 #include <iostream>
+
+#include "Game.hpp"
 #include "AGameEntity.hpp"
 #include "World.hpp"
 
 AGameEntity::AGameEntity () :
-  _world(*(new World()))
+  _world(Game::getInstance()->getWorld())
 {
 
 }
 
-AGameEntity::AGameEntity(int x, int y, World& world) :
+AGameEntity::AGameEntity(int x, int y) :
   _color(1),
   _posX(x),
   _posY(y),
-  _world(world)
+  _world(Game::getInstance()->getWorld())
 {
 
 }
 
 AGameEntity::AGameEntity(const AGameEntity& gameEntity) :
-  _world(*(new World()))
+  _world(Game::getInstance()->getWorld())
 {
   (void)gameEntity;
 }

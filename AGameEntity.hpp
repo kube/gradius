@@ -18,13 +18,13 @@ class AGameEntity {
 public:
 
   AGameEntity();
-  AGameEntity(int x, int y, World& world);
+  AGameEntity(int x, int y);
   AGameEntity(const AGameEntity& gameEntity);
   ~AGameEntity();
 
   AGameEntity& operator=(const AGameEntity& gameEntity);
 
-  void refreshPhyxsics() ;
+  virtual void refreshPhysics() = 0;
   void movePosition(float, float);
 
   World& getWorld();

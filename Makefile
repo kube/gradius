@@ -20,12 +20,9 @@ SOURCES = AGameEntity.cpp			\
 					AMissile.cpp				\
 					Game.cpp						\
 					World.cpp						\
-					Player.cpp						\
-
-TESTSSOURCES = 
+					Player.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
-TESTSOBJECTS = $(TESTSSOURCES:.cpp=.o)
 
 
 # Colors
@@ -38,7 +35,7 @@ SILENT_COLOR = \x1b[30;01m
 
 .PHONY: all re clean fclean
 
-all: $(NAME) tests
+all: $(NAME)
 
 %.o: %.cpp
 	@printf "$(SILENT_COLOR)$<$(NO_COLOR)"
@@ -50,20 +47,12 @@ $(NAME): $(OBJECTS) main.o
 	@$(CXX) $(CXXFLAGS) main.o $(OBJECTS) $(LDFLAGS) -o $(NAME)
 	@echo " $(OK_COLOR)Done ✓$(NO_COLOR)"
 
-tests: $(OBJECTS) $(TESTSOBJECTS) tests/tests.o
-	@printf "$(SILENT_COLOR)Tests$(NO_COLOR)"
-	@$(CXX) $(CXXFLAGS) tests/tests.o $(OBJECTS) $(TESTSOBJECTS) $(LDFLAGS) -o test
-	@echo " $(OK_COLOR)Done ✓$(NO_COLOR)"
-	@./test
-
 clean:
-	@rm -f $(OBJECTS) main.o tests/tests.o
-	@rm -f $(TESTSOBJECTS)
+	@rm -f $(OBJECTS) main.o
 	@echo "$(SILENT_COLOR)Cleaned objects$(NO_COLOR)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f test
 	@echo "$(SILENT_COLOR)Cleaned $(NAME)$(NO_COLOR)"
 
 re: fclean all

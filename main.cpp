@@ -11,8 +11,12 @@
 #include "Game.hpp"
 
 int main() {
-  Game * game = new Game(85, 70);
+  Game& game = *(Game::getInstance());
 
-  game->run();
+
+  game.setPlayer1(4, 4);
+
+  game.run();
+
   return 0;
 }

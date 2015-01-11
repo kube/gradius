@@ -30,8 +30,8 @@ static void drawRectangle(int x, int y, int width, int height) {
 
 
 World::World() :
-  _width(200),
-  _height(200)
+  _width(87),
+  _height(70)
 {
   _createMap();
 }

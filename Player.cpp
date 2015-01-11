@@ -16,7 +16,7 @@
 Player::Player() :
   AShip(100, 100, 100, 0, 1, 53)
 {
-  // std::cout << "Welcome to the Player !" << std::endl;
+
 }
 
 Player::Player(int x, int y) :
@@ -24,7 +24,6 @@ Player::Player(int x, int y) :
 {
   _posX = x;
   _posY = y;
-  // std::cout << "Welcome to the Player !" << std::endl;
 }
 
 Player::Player(const Player& game) :
@@ -45,14 +44,23 @@ Player& Player::operator=(const Player& game) {
 
 
 void  Player::refreshPhysics() {
-
   _posX += _dirX / 3;
   _posY += _dirY / 3;
 
-  // std::max();
+  _dirX *= 0.98;
+  _dirY *= 0.98;
 
-  _dirX *= 0.99;
-  _dirY *= 0.99;
+  if (_posX <= 1) {
+    _posX = 1;
+    _dirX = -_dirX * 2 / 3;
+  }
+  else if (_posX >= _world.getWidth()) {
+    _posX = _world.getWidth();
+    _dirX = -_dirX * 2 / 3;
+  }
+
+  _posY = _posY > _world.getHeight() ? _world.getHeight() - 1 : _posY;
+  _posY = _posY < 1 ? 1 : _posY;
 }
 
 void  Player::moveImpulsion(float x, float y) {
