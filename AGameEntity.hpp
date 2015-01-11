@@ -16,6 +16,7 @@ class AGameEntity {
 public:
 
   AGameEntity();
+	AGameEntity(int x, int y);
   AGameEntity(const AGameEntity& gameEntity);
   ~AGameEntity();
 
@@ -24,12 +25,14 @@ public:
   void refreshPhyxsics() ;
   void move(float, float) ;
 
+	int	getActive();
   int   getColor();
   float getPosX();
   float getPosY();
   float getDirX();
   float getDirY();
 
+	void	setActive(int);
   void  setColor(int);
   void  setPosX(float);
   void  setPosY(float);
@@ -39,6 +42,8 @@ public:
 
 protected:
 
+	int  _active;
+  
   int   _color;
 
   float _posX;

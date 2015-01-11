@@ -57,7 +57,7 @@ tests: $(OBJECTS) $(TESTSOBJECTS) tests/tests.o
 	@./test
 
 clean:
-	@rm -f $(OBJECTS)
+	@rm -f $(OBJECTS) main.o tests/tests.o
 	@rm -f $(TESTSOBJECTS)
 	@echo "$(SILENT_COLOR)Cleaned objects$(NO_COLOR)"
 

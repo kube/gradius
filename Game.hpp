@@ -20,6 +20,7 @@ class Game {
 public:
 
   Game();
+	Game(int x, int y);
   Game(const Game& game);
   ~Game();
 
@@ -27,7 +28,7 @@ public:
 
   void  draw();
   void  refreshPhysics();
-
+	World& getWorld();
 
 private:
 

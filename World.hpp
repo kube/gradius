@@ -18,6 +18,7 @@ class World {
 public:
 
   World();
+	World(int x, int y);
   World(const World& world);
   ~World();
 
@@ -31,7 +32,7 @@ public:
 
 private:
 
-  AGameEntity***  _map;
+  AGameEntity**  _map;
 
 
 };
