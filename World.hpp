@@ -28,7 +28,7 @@ public:
   void            refreshPhysics();
 
   AGameEntity*    getEntityAt(int, int);
-
+	void			setEntityAt(int x, int y, AGameEntity * entity);
 
 private:
 

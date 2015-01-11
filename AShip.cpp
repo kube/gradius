@@ -10,17 +10,19 @@
 
 #include "AShip.hpp"
 
-AShip::AShip() {
+AShip::AShip() : AGameEntity(){
 
 }
 
-AShip::AShip(int health, int maxHealth, float maxPower, float shootX, float shootY) :
+AShip::AShip(int health, int maxHealth, float maxPower, float shootX, float shootY, int color) :
+	AGameEntity(),
 	_health(health),
 	_maxHealth(maxHealth),
 	_maxPower(maxPower),
 	_shootX(shootX),
 	_shootY(shootY)
 {
+	_color = color;
 }
 
 AShip::AShip(const AShip& ship) : AGameEntity(ship) {

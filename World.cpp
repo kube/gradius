@@ -75,3 +75,8 @@ void          World::refreshPhysics() {
 AGameEntity*  World::getEntityAt(int x, int y) {
   return _map[x][y];
 }
+
+void    World::setEntityAt(int x, int y, AGameEntity * entity)
+{
+	this->_map[x][y] = entity;
+}
