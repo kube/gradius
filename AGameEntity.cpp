@@ -13,11 +13,11 @@
 
 
 AGameEntity::AGameEntity() : _active(0), _color(1){
-	std::cout << "Default Constructor AGameEntity" << std::endl;
+
 }
 
 AGameEntity::AGameEntity(int x, int y) : _active(0), _color(1), _posX(x), _posY(y){
-	std::cout << "Position Constructor AGameEntity with X : "<< _posX<< " and Y : " << _posY << std::endl;
+
 }
 
 AGameEntity::AGameEntity(const AGameEntity& gameEntity) {
@@ -34,10 +34,6 @@ AGameEntity& AGameEntity::operator=(const AGameEntity& gameEntity) {
   return *this;
 }
 
-
-int   AGameEntity::getActive() {
-	return _active;
-}
 
 int   AGameEntity::getColor() {
   return _color;
@@ -58,6 +54,7 @@ float AGameEntity::getDirX() {
 float AGameEntity::getDirY() {
   return _dirY;
 }
+
 
 void AGameEntity::setActive(int value) {
 	_active = value;

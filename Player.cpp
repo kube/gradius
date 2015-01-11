@@ -13,7 +13,7 @@
 
 Player::Player() : AShip(100, 100, 100, 0, 1, 53)
 {
-  std::cout << "Welcome to the Player !" << std::endl;
+  // std::cout << "Welcome to the Player !" << std::endl;
 }
 
 Player::Player(const Player& game) : AShip(game)

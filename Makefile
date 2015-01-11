@@ -13,7 +13,7 @@ NAME = ft_retro
 CXX = g++
 CXXFLAGS = -Wall -Werror -Wextra -O3
 
-LDFLAGS =  -lncurses
+LDFLAGS = -lncurses -lpthread
 
 SOURCES = AGameEntity.cpp			\
 					AShip.cpp						\

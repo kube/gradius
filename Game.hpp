@@ -15,6 +15,8 @@
 #include "AShip.hpp"
 #include "Player.hpp"
 
+#include <pthread.h>
+
 class Game {
 
 public:
@@ -26,14 +28,20 @@ public:
 
   Game& operator=(const Game& game);
 
+  void  run();
   void  draw();
   void  refreshPhysics();
-	World& getWorld();
+
+  void  playMusic();
+  void  stopMusic();
+  World& getWorld();
 
 private:
 
-	World&  _world;
-	Player& _player;
+  bool      _running;
+	World&    _world;
+	Player&   _player;
+  pthread_t _musicThread;
 
 };
 

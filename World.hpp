@@ -11,6 +11,7 @@
 #ifndef WORLD_HPP
 #define WORLD_HPP
 
+#include <ncurses.h>
 #include "AShip.hpp"
 
 class World {
@@ -28,10 +29,16 @@ public:
   void            refreshPhysics();
 
   AGameEntity*    getEntityAt(int, int);
-	void			setEntityAt(int x, int y, AGameEntity * entity);
+	void			      setEntityAt(int x, int y, AGameEntity * entity);
 
 private:
 
+  void            _createBox();
+  void            _createMap();
+
+  int             _width;
+  int             _height;
+  WINDOW*         _box;
   AGameEntity***  _map;
 
 

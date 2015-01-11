@@ -25,7 +25,6 @@ public:
   void refreshPhyxsics() ;
   void move(float, float) ;
 
-	int	getActive();
   int   getColor();
   float getPosX();
   float getPosY();
