@@ -41,9 +41,11 @@ public:
 
 private:
 
+  void      _getKey();
+
   bool      _running;
-	World&    _world;
-	Player&   _player1;
+  World&    _world;
+  Player&   _player1;
   pthread_t _musicThread;
 
 };

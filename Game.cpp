@@ -61,31 +61,62 @@ Game& Game::operator=(const Game& game) {
 }
 
 
+void  Game::_getKey() {
+  int key = getch(); 
+
+  switch (key) {
+
+    case 27:
+      _running = false;
+      break;
+
+    case KEY_RIGHT:
+      _player1.moveImpulsion(0.5, 0);
+      break;
+
+    case KEY_LEFT:
+      _player1.moveImpulsion(-0.5, 0);
+      break;
+
+    case KEY_UP:
+      _player1.moveImpulsion(0, -0.1);
+      break;
+
+    case KEY_DOWN:
+      _player1.moveImpulsion(0, 0.1);
+      break;
+  }
+}
+
 void  Game::run() {
   initscr();
+  ESCDELAY = 10;
+  keypad(stdscr, TRUE);
   nodelay(stdscr, TRUE);
   curs_set(0);
   noecho();
-  initColors();
+
+  (void)initColors();
+  // initColors();
 
   // playMusic();
 
   while (_running) {
     refresh();
-    move(0, 0);
 
     // Check times here
+
     draw();
     refreshPhysics();
 
-    if (getch() == KEY_BACKSPACE)
-      _running = false;
+    _getKey();
 
-    usleep(20000);
+    usleep(10000);
   }
 
-  echo();
   // stopMusic();
+
+  echo();
   endwin();
 }
 
@@ -114,7 +145,8 @@ void  Game::draw() {
 }
 
 void  Game::refreshPhysics() {
-
+  _world.refreshPhysics();
+  _player1.refreshPhysics();
 }
 
 World& Game::getWorld()

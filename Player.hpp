@@ -27,12 +27,14 @@ public:
   Player& operator=(const Player& game);
 
   void    draw(int offsetX, int offsetY);
+  void    refreshPhysics();
+  void    moveImpulsion(float x, float y);
 
 
 private:
 
   Player();
-
+  
 
 };
 

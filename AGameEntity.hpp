@@ -11,12 +11,14 @@
 #ifndef AGAMEENTITY_HPP
 #define AGAMEENTITY_HPP
 
+class World;
+
 class AGameEntity {
 
 public:
 
   AGameEntity();
-	AGameEntity(int x, int y);
+  AGameEntity(int x, int y, World& world);
   AGameEntity(const AGameEntity& gameEntity);
   ~AGameEntity();
 
@@ -25,13 +27,13 @@ public:
   void refreshPhyxsics() ;
   void movePosition(float, float);
 
+  World& getWorld();
   int   getColor();
   float getPosX();
   float getPosY();
   float getDirX();
   float getDirY();
 
-	void	setActive(int);
   void  setColor(int);
   void  setPosX(float);
   void  setPosY(float);
@@ -41,8 +43,6 @@ public:
 
 protected:
 
-	int  _active;
-  
   int   _color;
 
   float _posX;
@@ -50,6 +50,8 @@ protected:
 
   float _dirX;
   float _dirY;
+
+  World& _world;
 
 
 private:

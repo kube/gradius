@@ -10,18 +10,27 @@
 
 #include <iostream>
 #include "AGameEntity.hpp"
+#include "World.hpp"
 
-
-AGameEntity::AGameEntity() : _active(0), _color(1){
-
-}
-
-AGameEntity::AGameEntity(int x, int y) : _active(0), _color(1), _posX(x), _posY(y){
+AGameEntity::AGameEntity () :
+  _world(*(new World()))
+{
 
 }
 
-AGameEntity::AGameEntity(const AGameEntity& gameEntity) {
-  *this = gameEntity;
+AGameEntity::AGameEntity(int x, int y, World& world) :
+  _color(1),
+  _posX(x),
+  _posY(y),
+  _world(world)
+{
+
+}
+
+AGameEntity::AGameEntity(const AGameEntity& gameEntity) :
+  _world(*(new World()))
+{
+  (void)gameEntity;
 }
 
 AGameEntity::~AGameEntity() {
@@ -34,6 +43,10 @@ AGameEntity& AGameEntity::operator=(const AGameEntity& gameEntity) {
   return *this;
 }
 
+
+World& AGameEntity::getWorld() {
+  return _world;
+}
 
 int   AGameEntity::getColor() {
   return _color;
@@ -55,10 +68,6 @@ float AGameEntity::getDirY() {
   return _dirY;
 }
 
-
-void AGameEntity::setActive(int value) {
-	_active = value;
-}
 
 void AGameEntity::setColor(int value) {
   _color = value;

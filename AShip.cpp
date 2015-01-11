@@ -10,10 +10,6 @@
 
 #include "AShip.hpp"
 
-AShip::AShip() : AGameEntity(){
-
-}
-
 AShip::AShip(int health, int maxHealth, float maxPower, float shootX, float shootY, int color) :
 	AGameEntity(),
 	_health(health),

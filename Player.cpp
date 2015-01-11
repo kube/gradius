@@ -44,6 +44,25 @@ Player& Player::operator=(const Player& game) {
 }
 
 
+void  Player::refreshPhysics() {
+
+  _posX += _dirX / 3;
+  _posY += _dirY / 3;
+
+  // std::max();
+
+  _dirX *= 0.99;
+  _dirY *= 0.99;
+}
+
+void  Player::moveImpulsion(float x, float y) {
+  _dirX += x;
+  _dirY += y;
+
+  _dirX = _dirX > 4 ? 4 : _dirX;
+  _dirY = _dirY > 4 ? 4 : _dirY;
+}
+
 void  Player::draw(int offsetX, int offsetY) {
 
   move(offsetY + _posY, offsetX + _posX);
