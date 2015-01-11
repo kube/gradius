@@ -14,6 +14,15 @@ AShip::AShip() {
 
 }
 
+AShip::AShip(int health, int maxHealth, float maxPower, float shootX, float shootY) :
+	_health(health),
+	_maxHealth(maxHealth),
+	_maxPower(maxPower),
+	_shootX(shootX),
+	_shootY(shootY)
+{
+}
+
 AShip::AShip(const AShip& ship) : AGameEntity(ship) {
   (void)ship;
 }

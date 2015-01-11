@@ -32,7 +32,7 @@ public:
 
 private:
 
-  AGameEntity**  _map;
+  AGameEntity***  _map;
 
 
 };

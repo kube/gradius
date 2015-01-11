@@ -11,7 +11,7 @@
 #include <iostream>
 #include "Player.hpp"
 
-Player::Player() : AShip()
+Player::Player() : AShip(100, 100, 100, 0, 1)
 {
   std::cout << "Welcome to the Player !" << std::endl;
 }

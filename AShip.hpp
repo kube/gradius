@@ -20,6 +20,7 @@ class AShip : public AGameEntity {
 public:
 
   AShip();
+	AShip(int health, int maxHealth, float maxPower, float shootX, float shootY);
   AShip(const AShip& ship);
   ~AShip();
 
