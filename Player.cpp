@@ -17,7 +17,8 @@
 Player::Player() :
   AShip(100, 100, 100, 0, 1, 53)
 {
-
+  _deceleration = 0.98;
+  _acceleration = 0.33;
 }
 
 Player::Player(int x, int y) :
@@ -25,20 +26,23 @@ Player::Player(int x, int y) :
 {
   _posX = x;
   _posY = y;
+
+  _deceleration = 0.98;
+  _acceleration = 0.33;
 }
 
-Player::Player(const Player& game) :
-  AShip(game)
+Player::Player(const Player& player) :
+  AShip(player)
 {
-  *this = game;
+  *this = player;
 }
 
 Player::~Player() {
 
 }
 
-Player& Player::operator=(const Player& game) {
-  (void)game;
+Player& Player::operator=(const Player& player) {
+  (void)player;
   
   return *this;
 }
@@ -49,19 +53,19 @@ void  Player::shoot() {
 }
 
 void  Player::refreshPhysics() {
-  _posX += _dirX / 3;
-  _posY += _dirY / 3;
+  _posX += _dirX * _acceleration;
+  _posY += _dirY * _acceleration;
 
-  _dirX *= 0.98;
-  _dirY *= 0.98;
+  _dirX *= _deceleration;
+  _dirY *= _deceleration;
 
   if (_posX <= 1) {
     _posX = 1;
-    _dirX = -_dirX * 2 / 3;
+    _dirX = -_dirX;
   }
   else if (_posX >= _world.getWidth()) {
     _posX = _world.getWidth();
-    _dirX = -_dirX * 2 / 3;
+    _dirX = -_dirX;
   }
 
   _posY = _posY > _world.getHeight() ? _world.getHeight() - 1 : _posY;

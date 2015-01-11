@@ -45,6 +45,9 @@ protected:
 
   int   _color;
 
+  float _acceleration;
+  float _deceleration;
+
   float _posX;
   float _posY;
 

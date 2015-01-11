@@ -95,7 +95,7 @@ void  Game::run() {
     draw();
     refresh();
 
-    usleep(4000);
+    usleep(9000);
   }
 
   // stopMusic();
