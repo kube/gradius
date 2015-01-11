@@ -14,17 +14,17 @@
 
 
 AEnemy::AEnemy() :
-  AShip(100, 100, 100, 0, -1, 0)
+  AShip(100, 100, 100, 0, 1, 0)
 {
-  // std::cout << "Welcome to the AEnemy !" << std::endl;
+
 }
 
 AEnemy::AEnemy(int x, int y) :
-	AShip(100, 100, 100, 0, -1, 0)
+	AShip(100, 100, 100, 0, 1, 0)
 {
   _posX = x;
   _posY = y;
-  // std::cout << "Welcome to the AEnemy !" << std::endl;
+
 }
 
 AEnemy::AEnemy(const AEnemy& game) :

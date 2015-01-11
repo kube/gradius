@@ -78,6 +78,10 @@ void  Game::_getKey() {
   }
 }
 
+void  Game::stop() {
+  _running = false;
+}
+
 void  Game::run() {
   initscr();
   ESCDELAY = 10;
@@ -86,6 +90,9 @@ void  Game::run() {
   curs_set(0);
   noecho();
   initColors();
+
+
+  setPlayer1(_world.getWidth() / 2, _world.getHeight() * 3 / 4);
 
   // playMusic();
 

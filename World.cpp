@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include "World.hpp"
 
+#include "Game.hpp"
 
 static void drawRectangle(int x, int y, int width, int height) {
 
@@ -59,7 +60,7 @@ World& World::operator=(const World& world) {
 void          World::_createMap() {
   this->_map = new AGameEntity**[_width];
 
-  for (int i = 0; i < _width; i++)  {
+  for (int i = 0; i < _width; i++) {
     this->_map[i] = new AGameEntity*[_height];
 
     for (int j = 0; j < _height; j++)
@@ -76,16 +77,24 @@ int           World::getWidth() {
 }
 
 void          World::draw() {
-  clear();
+  erase();
 
   int offsetX = (COLS - _width) / 2;
   int offsetY = (LINES - _height) / 2;
 
   drawRectangle(offsetX, offsetY, _width, _height);
+
+  for (int i = 0; i < _width; i++)
+    for (int j = 0; j < _height; j++)
+      if (getEntityAt(i, j))
+        getEntityAt(i, j)->draw();
 }
 
 void          World::refreshPhysics() {
-
+  for (int i = 0; i < _width; i++)
+    for (int j = 0; j < _height; j++)
+      if (getEntityAt(i, j))
+        getEntityAt(i, j)->refreshPhysics();
 }
 
 AGameEntity*  World::getEntityAt(int x, int y) {

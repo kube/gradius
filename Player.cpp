@@ -15,20 +15,24 @@
 #include "BasicMissile.hpp"
 
 Player::Player() :
-  AShip(100, 100, 100, 0, 1, 53)
+  AShip(100, 100, 100, 0, -1, 53)
 {
   _deceleration = 0.98;
   _acceleration = 0.33;
+  _bounce = 1.3;
+  _maxSpeed = 13;
 }
 
 Player::Player(int x, int y) :
-  AShip(100, 100, 100, 0, 1, 53)
+  AShip(100, 100, 100, 0, -1, 53)
 {
   _posX = x;
   _posY = y;
 
   _deceleration = 0.98;
   _acceleration = 0.33;
+  _bounce = 1.3;
+  _maxSpeed = 13;
 }
 
 Player::Player(const Player& player) :
@@ -61,11 +65,20 @@ void  Player::refreshPhysics() {
 
   if (_posX <= 1) {
     _posX = 1;
-    _dirX = -_dirX;
+    _dirX = -_dirX * _bounce;
   }
   else if (_posX >= _world.getWidth()) {
     _posX = _world.getWidth();
-    _dirX = -_dirX;
+    _dirX = -_dirX * _bounce;
+  }
+
+  if (_posY <= 1) {
+    _posY = 1;
+    _dirY = -_dirY * _bounce;
+  }
+  else if (_posY >= _world.getHeight()) {
+    _posY = _world.getHeight();
+    _dirY = -_dirY * _bounce;
   }
 
   _posY = _posY > _world.getHeight() ? _world.getHeight() - 1 : _posY;
@@ -76,8 +89,8 @@ void  Player::moveImpulsion(float x, float y) {
   _dirX += x;
   _dirY += y;
 
-  _dirX = _dirX > 4 ? 4 : _dirX;
-  _dirY = _dirY > 4 ? 4 : _dirY;
+  _dirX = _dirX > _maxSpeed ? _maxSpeed : _dirX;
+  _dirY = _dirY > _maxSpeed ? _maxSpeed : _dirY;
 }
 
 void  Player::draw() {

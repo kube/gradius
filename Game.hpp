@@ -27,6 +27,8 @@ public:
   Game& operator=(const Game& game);
 
   void  run();
+  void  stop();
+
   void  draw();
   void  refreshPhysics();
 

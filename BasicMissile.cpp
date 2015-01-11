@@ -14,6 +14,8 @@
 #include "AShip.hpp"
 #include "World.hpp"
 
+#include "Game.hpp"
+
 BasicMissile::BasicMissile(const AShip& sender, float power) :
   AMissile(sender, power)
 {
@@ -23,11 +25,15 @@ BasicMissile::BasicMissile(const AShip& sender, float power) :
   _dirX = _sender.getShootX() * power;
   _dirY = _sender.getShootY() * power;
 
-  // _world[(int)_posX][(int)_posY] = this;
+  _world.setEntityAt((int)_posX, (int)_posY, this);
 }
 
 void BasicMissile::refreshPhysics() {
-  
+  _world.setEntityAt((int)_posX, (int)_posY, NULL);
+
+
+
+  _world.setEntityAt((int)_posX, (int)_posY, this);
 }
 
 void BasicMissile::draw() {

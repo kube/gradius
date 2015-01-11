@@ -24,6 +24,7 @@ public:
 
   AGameEntity& operator=(const AGameEntity& gameEntity);
 
+  virtual void draw() = 0;
   virtual void refreshPhysics() = 0;
   void movePosition(float, float);
 
@@ -45,14 +46,16 @@ protected:
 
   int   _color;
 
-  float _acceleration;
-  float _deceleration;
-
   float _posX;
   float _posY;
 
   float _dirX;
   float _dirY;
+
+  float _acceleration;
+  float _deceleration;
+  float _bounce;
+  float _maxSpeed;
 
   World& _world;
 
