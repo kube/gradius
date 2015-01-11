@@ -13,6 +13,7 @@
 
 #include "World.hpp"
 #include "AShip.hpp"
+#include "Player.hpp"
 
 class Game {
 
@@ -30,8 +31,8 @@ public:
 
 private:
 
-  World&  _world;
-
+	World&  _world;
+	Player& _player;
 
 };
 

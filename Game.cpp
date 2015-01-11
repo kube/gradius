@@ -12,13 +12,15 @@
 #include "Game.hpp"
 
 Game::Game() :
-  _world(*(new World()))
+	_world(*(new World())),
+	_player(*(new Player()))
 {
   std::cout << "Welcome to the Game !" << std::endl;
 }
 
 Game::Game(const Game& game) :
-  _world(*(new World()))
+	_world(*(new World())),
+	_player(*(new Player()))
 {
   *this = game;
 }

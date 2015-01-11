@@ -21,8 +21,8 @@ public:
 
   AGameEntity& operator=(const AGameEntity& gameEntity);
 
-  virtual void refreshPhyxsics() = 0;
-  virtual void move(float, float) = 0;
+  void refreshPhyxsics() ;
+  void move(float, float) ;
 
   int   getColor();
   float getPosX();
