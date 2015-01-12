@@ -21,6 +21,15 @@ BasicEnemy::BasicEnemy(int x, int y) :
   _posX = x;
   _posY = y;
 
+  _dirX = 0.2;
+  _dirY = 1;
+  _acceleration = 0.001;
+  _deceleration = 1.00001;
+  _skin = ACS_DARROW;
+
+  _bounce = 0.4;
+  _maxSpeed = 0.1;
+
   _world.setEntityAt((int)_posX, (int)_posY, this);
 }
 
@@ -28,6 +37,15 @@ BasicEnemy::BasicEnemy(const BasicEnemy& game) :
   AEnemy(game)
 {
   *this = game;
+
+  _dirX = 0;
+  _dirY = 1;
+  _acceleration = 0.001;
+  _deceleration = 1.0001;
+  _skin = ACS_DARROW;
+
+  _bounce = 0.4;
+  _maxSpeed = 0.1;
 
   _world.setEntityAt((int)_posX, (int)_posY, this);
 }
@@ -48,7 +66,7 @@ void  BasicEnemy::draw() {
   int offsetY = (LINES - _world.getHeight()) / 2;
 
   move(offsetY + _posY, offsetX + _posX);
-  printw("V");
+  addch(_skin);
 }
 
 void BasicEnemy::bounce() {

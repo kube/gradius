@@ -32,6 +32,8 @@ public:
   void  draw();
   void  refreshPhysics();
 
+  int   getElapsedTime();
+
   void  playMusic();
   void  stopMusic();
   World& getWorld();
@@ -40,6 +42,7 @@ public:
 
   void  setPlayer1(int x, int y);
   void  setPlayer2(int x, int y);
+  void  popRandomEnemy();
 
 
 private:
@@ -47,10 +50,13 @@ private:
   void      _getKey();
 
   bool      _running;
+  int       _elapsedTime;
+
   World&    _world;
   Player*   _player1;
   Player*   _player2;
   pthread_t _musicThread;
+
 
   static Game* _instance;
 

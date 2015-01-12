@@ -12,8 +12,9 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <ncurses.h>
+#include <stdlib.h>
 #include "Game.hpp"
-
+#include "BasicEnemy.hpp"
 
 static void initColors() {
   start_color();
@@ -81,6 +82,9 @@ void  Game::_getKey() {
 
 
 void  Game::run() {
+  static int elapsedMicroSeconds = 0;
+  _elapsedTime = 0;
+
   initscr();
   ESCDELAY = 10;
   keypad(stdscr, TRUE);
@@ -91,7 +95,7 @@ void  Game::run() {
 
 
   setPlayer1(_world.getWidth() / 2, _world.getHeight() * 3 / 4);
-  _world.popRandomEnemy();
+  
 
   // playMusic();
 
@@ -101,7 +105,14 @@ void  Game::run() {
     draw();
     refresh();
 
+    popRandomEnemy();
+  
     usleep(300);
+    elapsedMicroSeconds += 310;
+    if (elapsedMicroSeconds > 1000) {
+      elapsedMicroSeconds = elapsedMicroSeconds % 1000;
+      _elapsedTime++;
+    }
   }
 
   // stopMusic();
@@ -138,13 +149,25 @@ void  Game::refreshPhysics() {
   _world.refreshPhysics();
 }
 
-World& Game::getWorld()
-{
+World& Game::getWorld() {
 	return _world;
+}
+
+void  Game::popRandomEnemy() {
+  static int lastEnemyTimestamp = 0;
+
+  if (_elapsedTime - lastEnemyTimestamp > 1000) {
+    lastEnemyTimestamp = _elapsedTime;
+    new BasicEnemy(_world.getWidth() * (rand() % 100) / 100, 1);
+  }
+}
+
+int   Game::getElapsedTime() {
+  return _elapsedTime;
 }
 
 Game* Game::getInstance() {
   return _instance;
 }
 
-Game* Game::_instance = new Game(87,70);
+Game* Game::_instance = new Game(103, 74);

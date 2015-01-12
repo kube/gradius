@@ -47,8 +47,6 @@ public:
 
 protected:
 
-  int   _color;
-
   float _posX;
   float _posY;
 
@@ -59,6 +57,9 @@ protected:
   float _deceleration;
   float _bounce;
   float _maxSpeed;
+
+  int   _color;
+  int   _skin;
 
   World& _world;
 

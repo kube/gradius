@@ -15,15 +15,18 @@
 #include "World.hpp"
 
 AGameEntity::AGameEntity () :
+  _color(1),
+  _skin('*'),
   _world(Game::getInstance()->getWorld())
 {
 
 }
 
 AGameEntity::AGameEntity(int x, int y) :
-  _color(1),
   _posX(x),
   _posY(y),
+  _color(1),
+  _skin('*'),
   _world(Game::getInstance()->getWorld())
 {
 

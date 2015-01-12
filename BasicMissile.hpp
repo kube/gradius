@@ -20,6 +20,8 @@ class BasicMissile : public AMissile {
 public:
 
   BasicMissile(const AShip& sender, float power);
+  BasicMissile(const AShip& sender, float power,
+                float offsetX, float offsetY, float dirX, float dirY);
   ~BasicMissile();
 
   BasicMissile& operator=(const BasicMissile& ship);

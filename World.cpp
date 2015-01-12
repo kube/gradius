@@ -13,17 +13,22 @@
 #include "World.hpp"
 
 #include "Game.hpp"
-#include "BasicEnemy.hpp"
 
 static void drawRectangle(int x, int y, int width, int height) {
 
   attron(COLOR_PAIR(2));
 
-  mvvline(y, x, '*', height);
-  mvvline(y, x + width, '*', height);
+  mvvline(y, x, ACS_VLINE, height);
+  mvvline(y, x + width, ACS_VLINE, height);
 
-  mvhline(y, x, '*', width);
-  mvhline(y + height, x, '*', width);
+  mvhline(y, x, ACS_HLINE, width);
+  mvhline(y + height, x, ACS_HLINE, width + 1);
+
+  mvaddch(y, x, ACS_ULCORNER);
+  mvaddch(y, x + width, ACS_URCORNER);
+
+  mvaddch(y + height, x, ACS_LLCORNER);
+  mvaddch(y + height, x + width, ACS_LRCORNER);
 
   attroff(COLOR_PAIR(2));
 }
@@ -103,9 +108,15 @@ AGameEntity*  World::getEntityAt(int x, int y) {
 }
 
 void    World::setEntityAt(int x, int y, AGameEntity* entity) {
-	this->_map[x][y] = entity;
-}
+  if (x < 0 || y < 0 || x >= _width || y >= _height) {
+    entity->collide();
+    return;
+  }  
 
-void  World::popRandomEnemy() {
-  new BasicEnemy(_width / 2, 1);
+  // if (this->_map[x][y]) {
+  //   this->_map[x][y]->collide();
+  //   entity->collide();
+  // }
+  // else
+  	this->_map[x][y] = entity;
 }

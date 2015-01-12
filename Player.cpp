@@ -18,10 +18,11 @@
 Player::Player() :
   AShip(100, 100, 100, 0, -1, 53)
 {
-  _deceleration = 0.998;
-  _acceleration = 0.08;
-  _bounce = 0.4;
-  _maxSpeed = 1.3;
+  _deceleration = 0.997;
+  _acceleration = 0.06;
+  _bounce = 0.5;
+  _maxSpeed = 1.6;
+  _skin = ACS_UARROW;
 
   _world.setEntityAt((int)_posX, (int)_posY, this);
 }
@@ -32,10 +33,11 @@ Player::Player(int x, int y) :
   _posX = x;
   _posY = y;
 
-  _deceleration = 0.998;
-  _acceleration = 0.08;
-  _bounce = 0.4;
-  _maxSpeed = 1.3;
+  _deceleration = 0.997;
+  _acceleration = 0.06;
+  _bounce = 0.5;
+  _maxSpeed = 1.6;
+  _skin = ACS_UARROW;
 
   _world.setEntityAt((int)_posX, (int)_posY, this);
 }
@@ -62,7 +64,7 @@ void  Player::draw() {
   int offsetY = (LINES - _world.getHeight()) / 2;
 
   move(offsetY + _posY, offsetX + _posX);
-  printw("A");
+  addch(_skin);
 }
 
 void Player::bounce() {
@@ -70,11 +72,14 @@ void Player::bounce() {
 }
 
 void Player::collide() {
-
+  // _world.setEntityAt((int)_posX, (int)_posY, NULL);
+  // delete this;
 }
 
 void  Player::shoot() {
-  new BasicMissile(*this, 1.0f);
+  new BasicMissile(*this, 1.0f, 0.0f, 0.0f, 0.0f, -0.1f);
+  new BasicMissile(*this, 1.0f, -1.0f, 0.0f, -0.03f, -0.0f);
+  new BasicMissile(*this, 1.0f, 1.0f, 0.0f, 0.03f, -0.0f);
 }
 
 float abs(float a) {
