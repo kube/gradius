@@ -28,11 +28,12 @@ public:
   void    shoot();
   void    bounce();
   void    collide();
-  void    refreshPhysics();
+  void    think();
 
 
 private:
 
+  int _lastShootTimestamp;
   BasicEnemy();
 
 

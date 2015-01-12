@@ -29,7 +29,7 @@ public:
   void  draw();
   void  bounce();
   void  collide();
-  void  refreshPhysics();
+  void  think();
 
 
 protected:

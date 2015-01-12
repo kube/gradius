@@ -27,6 +27,7 @@ public:
   virtual void draw() = 0;
   virtual void bounce() = 0;
   virtual void collide() = 0;
+  virtual void think() = 0;
 
   void refreshPhysics();
   void movePosition(float, float);

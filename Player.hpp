@@ -29,7 +29,7 @@ public:
   void    draw();
   void    bounce();
   void    collide();
-  void    refreshPhysics();
+  void    think();
   void    moveImpulsion(float x, float y);
   void    shoot();
 

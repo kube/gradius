@@ -99,8 +99,10 @@ void          World::draw() {
 void          World::refreshPhysics() {
   for (int i = 0; i < _width; i++)
     for (int j = 0; j < _height; j++)
-      if (getEntityAt(i, j))
+      if (getEntityAt(i, j)) {
+        getEntityAt(i, j)->think();
         getEntityAt(i, j)->refreshPhysics();
+      }
 }
 
 AGameEntity*  World::getEntityAt(int x, int y) {
@@ -113,10 +115,15 @@ void    World::setEntityAt(int x, int y, AGameEntity* entity) {
     return;
   }  
 
-  // if (this->_map[x][y]) {
-  //   this->_map[x][y]->collide();
-  //   entity->collide();
-  // }
-  // else
+  if (!entity) {
+    this->_map[x][y] = NULL;
+    return;
+  }
+
+  if (this->_map[x][y]) {
+    this->_map[x][y]->collide();
+    entity->collide();
+  }
+  else
   	this->_map[x][y] = entity;
 }

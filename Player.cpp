@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "Player.hpp"
 #include "BasicMissile.hpp"
-
+#include "Game.hpp"
 
 Player::Player() :
   AShip(100, 100, 100, 0, -1, 53)
@@ -59,12 +59,19 @@ Player& Player::operator=(const Player& player) {
 }
 
 
+
+void  Player::think() {
+
+}
+
 void  Player::draw() {
   int offsetX = (COLS - _world.getWidth()) / 2;
   int offsetY = (LINES - _world.getHeight()) / 2;
 
+  attron(COLOR_PAIR(3));
   move(offsetY + _posY, offsetX + _posX);
   addch(_skin);
+  attroff(COLOR_PAIR(3));
 }
 
 void Player::bounce() {
@@ -72,8 +79,9 @@ void Player::bounce() {
 }
 
 void Player::collide() {
-  // _world.setEntityAt((int)_posX, (int)_posY, NULL);
-  // delete this;
+  _world.setEntityAt((int)_posX, (int)_posY, NULL);
+  delete this;
+  Game::getInstance()->gameOver();
 }
 
 void  Player::shoot() {

@@ -20,14 +20,29 @@ static void initColors() {
   start_color();
   init_pair(1, COLOR_CYAN, COLOR_BLACK);
   init_pair(2, COLOR_CYAN, COLOR_BLACK);
-  init_pair(3, COLOR_CYAN, COLOR_BLACK);
+  init_pair(3, COLOR_RED, COLOR_BLACK);
   init_pair(4, COLOR_CYAN, COLOR_BLACK);
   init_pair(5, COLOR_CYAN, COLOR_BLACK);
   init_pair(6, COLOR_CYAN, COLOR_BLACK);
 }
 
+static int min(int a, int b) {
+  return a < b ? a : b;
+}
+
+void Game::_drawScore() {
+  mvprintw(3, COLS / 2 - 5, "SCORE: %d", _score);
+}
+
+void Game::_drawGameOver() {
+  mvprintw(LINES / 2, COLS / 2 - 4, "GAME OVER");
+}
+
+
 Game::Game(int width, int height) :
   _running(true),
+  _score(0),
+  _gameOver(false),
   _world(*(new World(width, height)))
 {
 
@@ -50,7 +65,7 @@ void  Game::setPlayer1(int x, int y) {
 }
 
 void  Game::_getKey() {
-  int key = getch(); 
+  int key = getch();
 
   switch (key) {
 
@@ -59,23 +74,28 @@ void  Game::_getKey() {
       break;
 
     case KEY_RIGHT:
-      _player1->moveImpulsion(0.5, 0);
+      if (!_gameOver)
+        _player1->moveImpulsion(0.5, 0);
       break;
 
     case KEY_LEFT:
-      _player1->moveImpulsion(-0.5, 0);
+      if (!_gameOver)
+        _player1->moveImpulsion(-0.5, 0);
       break;
 
     case KEY_UP:
-      _player1->moveImpulsion(0, -0.1);
+      if (!_gameOver)
+        _player1->moveImpulsion(0, -0.1);
       break;
 
     case KEY_DOWN:
-      _player1->moveImpulsion(0, 0.1);
+      if (!_gameOver)
+        _player1->moveImpulsion(0, 0.1);
       break;
 
     case ' ':
-      _player1->shoot();
+      if (!_gameOver)
+        _player1->shoot();
       break;
   }
 }
@@ -142,7 +162,15 @@ void Game::stopMusic() {
 
 void  Game::draw() {
   _world.draw();
-  _player1->draw();
+
+  _drawScore();
+
+  if (_gameOver)
+    _drawGameOver();
+}
+
+void  Game::gameOver() {
+  _gameOver = true;
 }
 
 void  Game::refreshPhysics() {
@@ -156,10 +184,16 @@ World& Game::getWorld() {
 void  Game::popRandomEnemy() {
   static int lastEnemyTimestamp = 0;
 
-  if (_elapsedTime - lastEnemyTimestamp > 1000) {
+  if (_elapsedTime - lastEnemyTimestamp > min(2000 - _elapsedTime / 100, 300)) {
     lastEnemyTimestamp = _elapsedTime;
+    
     new BasicEnemy(_world.getWidth() * (rand() % 100) / 100, 1);
   }
+}
+
+void  Game::updateScore(int value) {
+  if (!_gameOver)
+    _score += value;
 }
 
 int   Game::getElapsedTime() {

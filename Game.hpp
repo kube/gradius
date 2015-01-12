@@ -36,7 +36,9 @@ public:
 
   void  playMusic();
   void  stopMusic();
+  void  gameOver();
   World& getWorld();
+  void  updateScore(int score);
 
   static Game* getInstance();
 
@@ -50,14 +52,18 @@ private:
   void      _getKey();
 
   bool      _running;
+  int       _score;
+  int       _gameOver;
   int       _elapsedTime;
+
 
   World&    _world;
   Player*   _player1;
   Player*   _player2;
   pthread_t _musicThread;
 
-
+  void      _drawScore();
+  void      _drawGameOver();
   static Game* _instance;
 
   Game();

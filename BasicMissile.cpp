@@ -64,6 +64,10 @@ BasicMissile::~BasicMissile() {
 
 
 
+void  BasicMissile::think() {
+
+}
+
 void BasicMissile::draw() {
   int offsetX = (COLS - _world.getWidth()) / 2;
   int offsetY = (LINES - _world.getHeight()) / 2;
